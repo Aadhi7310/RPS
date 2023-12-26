@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="RPS.css">
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors</h1>
+    <h3>The first one to reach 3 point wins </h3>
+    
+  
+    <div class="tot">
+      <div class="option" onclick="playGame('rock')"><img src="ROCK.jfif"></div>
+      <div class="option" onclick="playGame('paper')"><img src="PAPER.jfif"></div>
+      <div class="option" onclick="playGame('scissors')"><img src="SCIS.jfif"></div>
+    </div>
+    <div class="txt">
+    <div id="result">scores</div>
+    <div id="final result" class="finalres">
+    </div>
+    </div>
+
+    <button><a href="RPS.html">RESTART</a></button>
+    
+  
+    <script>
+      let playerScore = 0;
+      let computerScore = 0;
+      let rounds = 0;
+  
+      function playGame(playerChoice) {
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  
+        // Determine the winner
+        let result;
+        if (playerChoice === computerChoice) {
+          result = 'It\'s a tie!';
+        } else if (
+          (playerChoice === 'rock' && computerChoice === 'scissors') ||
+          (playerChoice === 'paper' && computerChoice === 'rock') ||
+          (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+          result = 'You win!';
+          playerScore++;
+        } else {
+          result = 'You lose!';
+          computerScore++;
+        }
+        document.getElementById('result').innerText = `Round ${rounds + 1}: Your choice: ${playerChoice} | Computer's choice: ${computerChoice} | Result: ${result} | Your Score: ${playerScore} | Computer Score: ${computerScore}`;
+        if (playerScore === 3 || computerScore === 3) {
+        if (playerScore === 3) {
+            document.getElementById('final result').innerText += '\nCongratulations! You win the game!';
+        } else {
+      document.getElementById('final result').innerText += '\nSorry! You lose the game. Try again!';
+    }
+    // Disable the options after the game ends
+    document.querySelectorAll('.option').forEach(option => option.onclick = null);
+  } else {
+    // Increment the round counter
+    rounds++;
+  }
+}
+  </script>
+</body>
+</html>
